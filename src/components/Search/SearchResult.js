@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const SearchResult = (props) => {
   console.log('SearchResult props ratesTable', props.currencyTable);
   return (
-    <div>
+    <div className="test">
       <ul>
         {props.data.map(function(value) {
 		  return <Item 

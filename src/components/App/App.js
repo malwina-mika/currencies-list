@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import styles from './App.scss';
 import { getData } from '../data/fetchData.js';
 import TableData from '../Table/TableData';
 import TableHeader from '../Table/TableHeader';
@@ -24,8 +24,13 @@ class App extends React.Component {
 
     getData()
       .then(data => {
-        const currencyTable = data[0].rates.map(item => item);
-        const dataToSearch = data[0].rates.map(currency => currency.currency);  
+
+        const currencyTable = data[0].rates.map((item) => {
+          return {...item, key: item.mid};
+        });
+
+        const dataToSearch = currencyTable.map(currency => currency.currency); 
+
         this.setState({
           ...this.state,
           currencyTable: currencyTable,
@@ -54,15 +59,14 @@ class App extends React.Component {
   }
 
   removeCurrency(item) {
-    const newArray = this.state.favorite.filter(to => item !== to);
-    console.log('newArray', newArray);
+    const updatedFavorite = this.state.favorite.filter(to => item !== to);
+
     this.setState({
-      favorite: newArray,
+      favorite: updatedFavorite,
     });
   }
 
   chooseCurrency(value, array) {
-
     const ItemToAdd = array.filter(item => value == item.currency);
     
     this.setState({
@@ -72,11 +76,14 @@ class App extends React.Component {
   }
 
   addToFavorite(){
-    const check = this.state.currencyTable.filter(item => this.state.chosenCurrency == item.currency);
-    console.log('check', check[0]);
-    if(!this.state.favorite.includes(check[0])) {
+    const chosen = this.state.currencyTable.filter(item => this.state.chosenCurrency == item.currency);
+    const chosenWithKey = chosen.map((item, index) => {
+      return {...item, key: index};
+    });
+    console.log('chosen', chosen[0]);
+    if(!this.state.favorite.includes(chosen[0])) {
       this.setState({
-        favorite: this.state.favorite.concat(check),
+        favorite: this.state.favorite.concat(chosenWithKey),
         chosenCurrency: '',
         list: undefined,
       });
@@ -87,7 +94,7 @@ class App extends React.Component {
     console.log(this.state.currencyTable);
     const {appName, currencyTable, favorite, list} = this.state;
     return (
-      <div>  
+      <div >  
         <div>
           <h2>{appName}</h2>
           <SearchBar
@@ -96,16 +103,18 @@ class App extends React.Component {
           {(list) ? 
             <SearchResult 
               onclick={this.chooseCurrency.bind(this)}
-              currencyTable={currencyTable} data={list} /> : null  }
-          <button onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
+              currencyTable={currencyTable} 
+              data={list} /> : null  }
+          <button 
+            onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
         </div>
-
         <table>
-          <tbody>
+          <thead>
             <tr><TableHeader/></tr>
-            <TableData onclick={this.removeCurrency.bind(this)} 
-              currencyTable={favorite} />
-          </tbody>
+          </thead>
+          <TableData onclick={this.removeCurrency.bind(this)} 
+            currencyTable={favorite} 
+            className={styles.switchWrapper} />  
         </table>
       </div>
     );
