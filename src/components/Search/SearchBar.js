@@ -5,10 +5,10 @@ import styles from './Search.scss';
 const SearchBar = (props) => {
   return(
     <div>
-    <input 
-      className={styles.searchInput}
-	    value={props.chosen} 
-	    onChange={props.search} placeholder="Search Currency"/>
+      <input 
+        className={styles.searchInput}
+	      value={props.chosen} 
+	      onChange={props.search} placeholder="Search Currency"/>
     </div>
   );
 };

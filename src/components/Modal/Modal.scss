@@ -16,6 +16,7 @@ html, body, .app {
 	bottom: 0;
 	margin: auto;
 	background-color: rgba(0,0,0, 0.5);
+	z-index: 999;
   }
 
   .popupInner {
@@ -26,6 +27,7 @@ html, body, .app {
 	bottom: 37%;
 	margin: auto;;
 	background-color: rgb(252, 252, 252);
+	z-index: 999;
   }
 
   .popupHeader {

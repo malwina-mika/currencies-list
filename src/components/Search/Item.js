@@ -5,8 +5,8 @@ import styles from './Search.scss';
 const Item = (props) => {
   return(
     <li 
-    onClick={() => props.onclick(props.value, props.currencyTable)}
-    className={styles.searchItem}>
+      onClick={() => props.onclick(props.value, props.currencyTable)}
+      className={styles.searchItem}>
       {props.value}
     </li>
   );
