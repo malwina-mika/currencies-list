@@ -27,6 +27,14 @@ class App extends React.Component {
       .finally(data => console.log('finally full table response', data));
   }
 
+  removeCurrency(item){
+    const newArray = this.state.currencyTable.filter(to => item !== to);
+    console.log('newArray', newArray);
+    this.setState({
+      currencyTable: newArray,
+    });
+  }
+
   render() {
     console.log(this.state.currencyTable);
     return (
@@ -36,7 +44,7 @@ class App extends React.Component {
         <table>
           <tbody>
             <tr><TableHeader/></tr>
-            <TableData currencyTable={this.state.currencyTable} />
+            <TableData onclick={this.removeCurrency.bind(this)} currencyTable={this.state.currencyTable} />
           </tbody>
         </table>
       </div>

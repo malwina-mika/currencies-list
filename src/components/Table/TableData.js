@@ -5,7 +5,7 @@ const TableData = (props) => {
     const { currency, code, mid} = column; 
     return (
       <>
-        <tr  key={index}>
+        <tr onClick={() => props.onclick(column)} key={index}>
           <td>{currency}</td>
           <td>{code}</td>
           <td>{mid}</td>
