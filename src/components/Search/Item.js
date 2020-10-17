@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
  
 const Item = (props) => {
   return(
-    <li>
+    <li onClick={() => props.onclick(props.value, props.currencyTable)}>
       {props.value}
     </li>
   );
@@ -11,6 +11,8 @@ const Item = (props) => {
 
 Item.propTypes = { 
   value: PropTypes.node, 
+  currencyTable: PropTypes.array,
+  onclick: PropTypes.func,
 };
 
 export default Item;

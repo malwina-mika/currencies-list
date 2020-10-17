@@ -8,7 +8,11 @@ const SearchResult = (props) => {
     <div>
       <ul>
         {props.data.map(function(value) {
-          return <Item key={value} value={value} currencyTable={props.currencyTable}/>;
+		  return <Item 
+		    key={value} 
+		    value={value} 
+		    currencyTable={props.currencyTable}
+		    onclick={props.onclick}/>;
         })}
       </ul>
     </div>
@@ -19,6 +23,7 @@ const SearchResult = (props) => {
 SearchResult.propTypes = { 
   currencyTable: PropTypes.array, 
   data: PropTypes.array, 
+  onclick: PropTypes.func,
 };
 
 export default SearchResult;

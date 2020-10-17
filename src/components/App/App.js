@@ -13,6 +13,7 @@ class App extends React.Component {
     this.state = {
       currencyTable: [],
       data: [],
+      chosenCurrency: '',
       appName: 'React Search Bar',
       list: undefined,
     };
@@ -47,8 +48,8 @@ class App extends React.Component {
     }
     this.setState({
       list: queryData,
+      chosenCurrency: e.target.value,
     });
-
   }
 
   removeCurrency(item){
@@ -56,6 +57,16 @@ class App extends React.Component {
     console.log('newArray', newArray);
     this.setState({
       currencyTable: newArray,
+    });
+  }
+
+  addCurrency(value, array){
+
+    const ItemToAdd = array.filter(item => value == item.currency);
+    
+    this.setState({
+      chosenCurrency: ItemToAdd[0].currency,
+      list: undefined,
     });
   }
 
@@ -67,9 +78,11 @@ class App extends React.Component {
         <div>
           <h2>{appName}</h2>
           <SearchBar
+            chosen={this.state.chosenCurrency} 
             search={this.searchData.bind(this)} />
           {(list) ? 
             <SearchResult 
+              onclick={this.addCurrency.bind(this)}
               currencyTable={currencyTable} data={list} /> : null  }
         </div>
 
