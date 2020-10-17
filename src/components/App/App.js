@@ -16,6 +16,7 @@ class App extends React.Component {
       chosenCurrency: '',
       appName: 'React Search Bar',
       list: undefined,
+      favorite: [],
     };
   }
 
@@ -52,15 +53,15 @@ class App extends React.Component {
     });
   }
 
-  removeCurrency(item){
-    const newArray = this.state.currencyTable.filter(to => item !== to);
+  removeCurrency(item) {
+    const newArray = this.state.favorite.filter(to => item !== to);
     console.log('newArray', newArray);
     this.setState({
-      currencyTable: newArray,
+      favorite: newArray,
     });
   }
 
-  addCurrency(value, array){
+  chooseCurrency(value, array) {
 
     const ItemToAdd = array.filter(item => value == item.currency);
     
@@ -70,9 +71,21 @@ class App extends React.Component {
     });
   }
 
+  addToFavorite(){
+    const check = this.state.currencyTable.filter(item => this.state.chosenCurrency == item.currency);
+    console.log('check', check[0]);
+    if(!this.state.favorite.includes(check[0])) {
+      this.setState({
+        favorite: this.state.favorite.concat(check),
+        chosenCurrency: '',
+        list: undefined,
+      });
+    }
+  }
+
   render() {
     console.log(this.state.currencyTable);
-    const {appName, currencyTable, list} = this.state;
+    const {appName, currencyTable, favorite, list} = this.state;
     return (
       <div>  
         <div>
@@ -82,15 +95,16 @@ class App extends React.Component {
             search={this.searchData.bind(this)} />
           {(list) ? 
             <SearchResult 
-              onclick={this.addCurrency.bind(this)}
+              onclick={this.chooseCurrency.bind(this)}
               currencyTable={currencyTable} data={list} /> : null  }
+          <button onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
         </div>
 
         <table>
           <tbody>
             <tr><TableHeader/></tr>
             <TableData onclick={this.removeCurrency.bind(this)} 
-              currencyTable={currencyTable} />
+              currencyTable={favorite} />
           </tbody>
         </table>
       </div>
