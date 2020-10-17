@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalWrapper from '../Modal/ModalWrapper';
+import styles from './Table.scss';
 
 const TableData = (props) => {
   
@@ -8,15 +9,14 @@ const TableData = (props) => {
     const { currency, code, mid} = column; 
     return (
       <> 
-        <tbody>
+        <tbody className={styles.tableBody} >
           <tr key={index}>
             <td>{currency}</td>
             <td>{code}</td>
             <td>{mid}</td>
+            <td><ModalWrapper onclick={props.onclick} column={column}/> </td>
           </tr>
         </tbody>
-		    <ModalWrapper onclick={props.onclick} column={column}/> 
-           
       </>
     );
   });

@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 import PropTypes from 'prop-types';
+import styles from './Modal.scss';
 
 class ModalWrapper extends React.Component {
   constructor() {
@@ -23,8 +24,11 @@ class ModalWrapper extends React.Component {
 
  render() {
    return (
-     <div>
-       <button onClick={this.togglePopup.bind(this)}>Delete</button>
+     <div className={styles.modalContainer} >
+       <div className={styles.tooltip}><i onClick={this.togglePopup.bind(this)} className={`fas fa-trash-alt ${styles.trashIcon}`}></i>
+       <span className={styles.tooltiptext}>Remove</span>
+       </div>
+
        {this.state.showPopup ? 
        <Modal
           text='Close'

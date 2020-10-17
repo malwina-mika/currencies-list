@@ -1,12 +1,13 @@
 import React from 'react';
 import Item from './Item';
 import PropTypes from 'prop-types';
+import styles from './Search.scss';
 
 const SearchResult = (props) => {
   console.log('SearchResult props ratesTable', props.currencyTable);
   return (
-    <div className="test">
-      <ul>
+    <div className={styles.relative}>
+      <ul className={styles.searchListWrapper}>
         {props.data.map(function(value) {
 		  return <Item 
 		    key={value} 

@@ -18,13 +18,65 @@ html, body, .app {
 	background-color: rgba(0,0,0, 0.5);
   }
 
-  .popup_inner {
+  .popupInner {
 	position: absolute;
-	left: 25%;
-	right: 25%;
-	top: 25%;
-	bottom: 25%;
-	margin: auto;
-	background: white;
-	background-color: rgb(144, 162, 173);
+	left: 35%;
+	right: 35%;
+	top: 37%;
+	bottom: 37%;
+	margin: auto;;
+	background-color: rgb(252, 252, 252);
+  }
+
+  .popupHeader {
+	margin-top: 50px;
+	font-size: 20px;
+  }
+
+  .trashIcon{
+	color: rgb(209, 116, 9);
+	cursor: pointer;
+  }
+
+  .btnClose, .btnRemove {
+	cursor: pointer;
+	border: none;
+	font-size: 18px;
+	margin: 30px;
+	min-width: 150px;
+	padding: 12px;
+	max-height: 50px!important;
+	background-color: rgb(224, 218, 213);
+	&:hover {
+		background-color: rgb(201, 195, 189); 
+	  }
+  }
+
+  .btnRemove {
+	background-color: rgb(255, 171, 93);
+	&:hover {
+		background-color: rgb(240, 138, 42); 
+	}
+  }
+
+  .tooltip {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+	visibility: hidden;
+	width: 80px;
+	background-color: rgba(167, 154, 142, 0.8);
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	margin: 10px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+	visibility: visible;
   }

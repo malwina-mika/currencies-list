@@ -14,7 +14,7 @@ class App extends React.Component {
       currencyTable: [],
       data: [],
       chosenCurrency: '',
-      appName: 'React Search Bar',
+      appName: 'Your List of Favorite Currency ',
       list: undefined,
       favorite: [],
     };
@@ -94,21 +94,10 @@ class App extends React.Component {
     console.log(this.state.currencyTable);
     const {appName, currencyTable, favorite, list} = this.state;
     return (
-      <div >  
-        <div>
-          <h2>{appName}</h2>
-          <SearchBar
-            chosen={this.state.chosenCurrency} 
-            search={this.searchData.bind(this)} />
-          {(list) ? 
-            <SearchResult 
-              onclick={this.chooseCurrency.bind(this)}
-              currencyTable={currencyTable} 
-              data={list} /> : null  }
-          <button 
-            onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
-        </div>
-        <table>
+      <div className={styles.container}>  
+        <h2>{appName}</h2>
+        <div className={styles.searchWrapper}>
+        <table className={styles.mainTable}>
           <thead>
             <tr><TableHeader/></tr>
           </thead>
@@ -116,6 +105,22 @@ class App extends React.Component {
             currencyTable={favorite} 
             className={styles.switchWrapper} />  
         </table>
+        <div className={styles.flex}>
+            <SearchBar
+              className={styles.searchBar}
+              chosen={this.state.chosenCurrency} 
+              search={this.searchData.bind(this)} />
+            {(list) ? 
+            <SearchResult 
+            className={styles.searchRes}
+              onclick={this.chooseCurrency.bind(this)}
+              currencyTable={currencyTable} 
+              data={list} /> : null  }
+              <button 
+                className={styles.btnSave}
+                onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
+          </div>
+        </div>
       </div>
     );
   }

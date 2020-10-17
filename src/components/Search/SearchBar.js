@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './Search.scss';
 
 const SearchBar = (props) => {
   return(
     <div>
-	  <input 
+    <input 
+      className={styles.searchInput}
 	    value={props.chosen} 
 	    onChange={props.search} placeholder="Search Currency"/>
     </div>
