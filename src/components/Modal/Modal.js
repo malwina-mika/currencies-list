@@ -15,7 +15,7 @@ class Modal extends React.Component {
         <div className={styles.popupInner}>
           <h5 className={styles.popupHeader}>Are you sure you want to delete this currency?</h5>
           <button className={styles.btnClose} onClick={this.props.closePopup}>Cancel</button>					
-          <button className={styles.btnRemove} onClick={() => this.props.onclick(this.props.column)} type="button">Yes!</button>
+          <button className={styles.btnRemove} onClick={() => {this.props.onclick(this.props.column); this.props.closePopup();}} type="button">Yes!</button>
         </div>
       </div>
     );

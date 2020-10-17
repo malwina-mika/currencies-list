@@ -77,13 +77,9 @@ class App extends React.Component {
 
   addToFavorite(){
     const chosen = this.state.currencyTable.filter(item => this.state.chosenCurrency == item.currency);
-    const chosenWithKey = chosen.map((item, index) => {
-      return {...item, key: index};
-    });
-    console.log('chosen', chosen[0]);
     if(!this.state.favorite.includes(chosen[0])) {
       this.setState({
-        favorite: this.state.favorite.concat(chosenWithKey),
+        favorite: this.state.favorite.concat(chosen),
         chosenCurrency: '',
         list: undefined,
       });
@@ -97,28 +93,28 @@ class App extends React.Component {
       <div className={styles.container}>  
         <h2>{appName}</h2>
         <div className={styles.searchWrapper}>
-        <table className={styles.mainTable}>
-          <thead>
-            <tr><TableHeader/></tr>
-          </thead>
-          <TableData onclick={this.removeCurrency.bind(this)} 
-            currencyTable={favorite} 
-            className={styles.switchWrapper} />  
-        </table>
-        <div className={styles.flex}>
+          <table className={styles.mainTable}>
+            <thead>
+              <tr><TableHeader/></tr>
+            </thead>
+            <TableData onclick={this.removeCurrency.bind(this)} 
+              currencyTable={favorite} 
+              className={styles.switchWrapper} />  
+          </table>
+          <div className={styles.flex}>
             <SearchBar
               className={styles.searchBar}
               chosen={this.state.chosenCurrency} 
               search={this.searchData.bind(this)} />
             {(list) ? 
-            <SearchResult 
-            className={styles.searchRes}
-              onclick={this.chooseCurrency.bind(this)}
-              currencyTable={currencyTable} 
-              data={list} /> : null  }
-              <button 
-                className={styles.btnSave}
-                onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
+              <SearchResult 
+                className={styles.searchRes}
+                onclick={this.chooseCurrency.bind(this)}
+                currencyTable={currencyTable} 
+                data={list} /> : null  }
+            <button 
+              className={styles.btnSave}
+              onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
           </div>
         </div>
       </div>
