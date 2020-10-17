@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { getData } from '../data/fetchData.js';
+import TableData from '../Table/TableData';
+import TableHeader from '../Table/TableHeader';
 
 class App extends React.Component {  
     
@@ -30,6 +32,13 @@ class App extends React.Component {
     return (
       <div>  
         <h2>Title</h2>
+
+        <table>
+          <tbody>
+            <tr><TableHeader/></tr>
+            <TableData currencyTable={this.state.currencyTable} />
+          </tbody>
+        </table>
       </div>
     );
   }
