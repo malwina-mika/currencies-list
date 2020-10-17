@@ -3,6 +3,8 @@ import './App.css';
 import { getData } from '../data/fetchData.js';
 import TableData from '../Table/TableData';
 import TableHeader from '../Table/TableHeader';
+import SearchBar from '../Search/SearchBar';
+import SearchResult from '../Search/SearchResult';
 
 class App extends React.Component {  
     
@@ -10,6 +12,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       currencyTable: [],
+      data: [],
+      appName: 'React Search Bar',
+      list: undefined,
     };
   }
 
@@ -18,13 +23,32 @@ class App extends React.Component {
     getData()
       .then(data => {
         const currencyTable = data[0].rates.map(item => item);
+        const dataToSearch = data[0].rates.map(currency => currency.currency);  
         this.setState({
           ...this.state,
           currencyTable: currencyTable,
+          data: dataToSearch,
         });
       })
       .catch(error => console.error('Error:', error))
       .finally(data => console.log('finally full table response', data));
+  }
+
+  searchData(e) {
+    const queryData = [];
+    if(e.target.value != '') {
+      this.state.data.forEach(function(name) {
+        if(name.toLowerCase().indexOf(e.target.value)!=-1) {
+          if(queryData.length < 10) {
+            queryData.push(name);
+          }
+        }
+      });
+    }
+    this.setState({
+      list: queryData,
+    });
+
   }
 
   removeCurrency(item){
@@ -37,14 +61,23 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.currencyTable);
+    const {appName, currencyTable, list} = this.state;
     return (
       <div>  
-        <h2>Title</h2>
+        <div>
+          <h2>{appName}</h2>
+          <SearchBar
+            search={this.searchData.bind(this)} />
+          {(list) ? 
+            <SearchResult 
+              currencyTable={currencyTable} data={list} /> : null  }
+        </div>
 
         <table>
           <tbody>
             <tr><TableHeader/></tr>
-            <TableData onclick={this.removeCurrency.bind(this)} currencyTable={this.state.currencyTable} />
+            <TableData onclick={this.removeCurrency.bind(this)} 
+              currencyTable={currencyTable} />
           </tbody>
         </table>
       </div>
