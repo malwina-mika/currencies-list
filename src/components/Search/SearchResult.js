@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styles from './Search.scss';
 
 const SearchResult = (props) => {
-  console.log('SearchResult props ratesTable', props.currencyTable);
   return (
     <div className={styles.relative}>
       <ul className={styles.searchListWrapper}>

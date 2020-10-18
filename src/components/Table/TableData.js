@@ -11,6 +11,7 @@ const TableData = (props) => {
       <> 
         <tbody className={styles.tableBody} >
           <tr key={index}>
+            <td className={styles.tableNumber}>{index+1}</td>
             <td>{currency}</td>
             <td>{code}</td>
             <td>{mid}</td>

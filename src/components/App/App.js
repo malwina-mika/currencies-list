@@ -35,7 +35,7 @@ class App extends React.Component {
           ...this.state,
           currencyTable: currencyTable,
           data: dataToSearch,
-          favorite: this.state.favorite.concat(currencyTable[3]),
+          favorite: this.state.favorite.concat(currencyTable[3],currencyTable[8]),
         });
       })
       .catch(error => console.error('Error:', error))
@@ -59,8 +59,6 @@ class App extends React.Component {
     if(e.target.value != '') {
       this.upDateDataArray().forEach(function(name) {
         if(name.indexOf(e.target.value)!=-1 || name.toLowerCase().indexOf(e.target.value)!=-1) {
-          console.log(name)
-          console.log(name.toLowerCase())
           if(queryData.length < 10) {
             queryData.push(name);
           }
@@ -102,7 +100,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.currencyTable);
     const {appName, currencyTable, favorite, list} = this.state;
     return (
       <div className={styles.container}>  
