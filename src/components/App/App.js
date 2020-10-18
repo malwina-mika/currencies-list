@@ -14,7 +14,7 @@ class App extends React.Component {
       currencyTable: [],
       data: [],
       chosenCurrency: '',
-      appName: 'Your List of Favorite Currency ',
+      appName: 'Your List of Favorite Currencies ',
       list: undefined,
       favorite: [],
     };
@@ -35,16 +35,25 @@ class App extends React.Component {
           ...this.state,
           currencyTable: currencyTable,
           data: dataToSearch,
+          favorite: this.state.favorite.concat(currencyTable[3]),
         });
       })
       .catch(error => console.error('Error:', error))
       .finally(data => console.log('finally full table response', data));
   }
 
+  upDateDataArray(){
+    let match = [];
+    for(let word of this.state.data){
+      if(!this.state.favorite.find((val) => val.currency == word ))match.push(word);
+    }
+    return match;
+  }
+
   searchData(e) {
     const queryData = [];
     if(e.target.value != '') {
-      this.state.data.forEach(function(name) {
+      this.upDateDataArray().forEach(function(name) {
         if(name.toLowerCase().indexOf(e.target.value)!=-1) {
           if(queryData.length < 10) {
             queryData.push(name);
@@ -114,7 +123,7 @@ class App extends React.Component {
                 data={list} /> : null  }
             <button 
               className={styles.btnSave}
-              onClick={this.addToFavorite.bind(this)}> Add to Favorite</button>
+              onClick={() => this.addToFavorite()}> Add to Favorite</button>
           </div>
         </div>
       </div>
