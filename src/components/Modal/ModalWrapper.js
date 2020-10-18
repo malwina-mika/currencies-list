@@ -23,6 +23,7 @@ class ModalWrapper extends React.Component {
  }
 
  render() {
+  const {column, onclick} = this.props
    return (
      <div className={styles.modalContainer} >
        <div className={styles.tooltip}><i onClick={this.togglePopup.bind(this)} className={`fas fa-trash-alt ${styles.trashIcon}`}></i>
@@ -33,8 +34,8 @@ class ModalWrapper extends React.Component {
        <Modal
           text='Close'
           closePopup={this.togglePopup.bind(this)}
-          onclick={this.props.onclick}
-          column={this.props.column} /> : null }
+          onclick={onclick}
+          column={column} /> : null }
     </div>
 	  );
   }
