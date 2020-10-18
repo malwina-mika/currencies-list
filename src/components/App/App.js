@@ -26,7 +26,7 @@ class App extends React.Component {
       .then(data => {
 
         const currencyTable = data[0].rates.map((item) => {
-          return {...item, key: item.mid};
+          return {...item, currency: this.capitalizeFirstLetter(item.currency), key: item.mid};
         });
 
         const dataToSearch = currencyTable.map(currency => currency.currency); 
@@ -42,6 +42,10 @@ class App extends React.Component {
       .finally(data => console.log('finally full table response', data));
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   upDateDataArray(){
     let match = [];
     for(let word of this.state.data){
@@ -54,7 +58,9 @@ class App extends React.Component {
     const queryData = [];
     if(e.target.value != '') {
       this.upDateDataArray().forEach(function(name) {
-        if(name.toLowerCase().indexOf(e.target.value)!=-1) {
+        if(name.indexOf(e.target.value)!=-1 || name.toLowerCase().indexOf(e.target.value)!=-1) {
+          console.log(name)
+          console.log(name.toLowerCase())
           if(queryData.length < 10) {
             queryData.push(name);
           }
