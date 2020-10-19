@@ -79,6 +79,12 @@ class App extends React.Component {
     });
   }
 
+  removeAllCurrencies(){
+    this.setState({
+      favorite: [],
+    });
+  }
+
   chooseCurrency(value, array) {
     const ItemToAdd = array.filter(item => value == item.currency);
     
@@ -113,6 +119,9 @@ class App extends React.Component {
               currencyTable={favorite} 
               className={styles.switchWrapper} />  
           </table>
+          <button 
+              className={styles.btnRemoveAll}
+              onClick={() => this.removeAllCurrencies()}>Remove All</button>
           <div className={styles.flex}>
             <SearchBar
               className={styles.searchBar}
