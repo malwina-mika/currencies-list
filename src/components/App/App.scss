@@ -82,7 +82,7 @@ table {
   border: none;
   font-size: 18px;
   color: rgb(70, 49, 10);
-  margin: 60px 10px;
+  margin: 0 50px 0 10px;
   min-width: 130px;
   padding: 5px 0;
   background-color: rgb(226, 226, 225);
@@ -90,5 +90,38 @@ table {
   max-height: 50px!important;
   &:hover {
     background-color: rgb(190, 189, 188); 
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  h2 {
+    margin: 30px;
+  }
+	.searchWrapper {
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    .flex, .btnRemoveAll {
+      order: -1;
+      margin: 10px;
+    }
+  }
+
+  table{
+    display: block;
+    width: 100%;
+    overflow: auto;
+    max-width: 95vw;
+    margin:  0 20px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .flex {
+    flex-direction: column;
+  }
+  .btnSave {
+    width: 230px;
+    margin: 5px;
   }
 }
